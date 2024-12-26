@@ -1,12 +1,171 @@
-//base by DGXeon
-//re-upload? recode? copy code? give credit ya :)
-//YouTube: @DGXeon
-//Instagram: unicorn_xeon13
-//Telegram: t.me/xeonbotinc
-//GitHub: @DGXeon
-//WhatsApp: +916909137213
-//want more free bot scripts? 
-//subscribe to my youtube channel: https://youtube.com/@DGXeon
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 process.on('unhandledRejection', console.error)
 process.on('uncaughtException', console.error)
@@ -26391,3 +26550,66 @@ fs.watchFile(file, () => {
 	delete require.cache[file]
 	require(file)
 });
+// Nouvelle Fonctionalitée
+//=======================================================================================================================================================================================================================================================
+// Simulation locale pour tester les fonctionnalités !quote et !song
+
+const ytSearch = require('yt-search');
+const fs = require('fs');
+
+// Chargement d'une grande base de données de citations inspirantes depuis un fichier JSON
+let quotes = [];
+try {
+    quotes = JSON.parse(fs.readFileSync('quotes.json', 'utf8'));
+} catch (error) {
+    console.error("Erreur lors du chargement des citations :", error);
+    quotes = [
+        "La persévérance est la clé du succès.",
+        "Chaque jour est une nouvelle chance de briller.",
+        "Le savoir est une arme, utilisez-le à bon escient.",
+        "L'échec est simplement l'opportunité de recommencer, cette fois de manière plus intelligente."
+    ];
+}
+
+// Fonction pour générer une citation inspirante
+function getQuote() {
+    return quotes[Math.floor(Math.random() * quotes.length)];
+}
+
+// Fonction pour rechercher une chanson sur YouTube
+async function searchSong(query) {
+    if (!query) {
+        return "❌ Veuillez fournir le nom d'une chanson.";
+    }
+
+    try {
+        const searchResult = await ytSearch(query);
+        const song = searchResult.videos[0];
+
+        if (song) {
+            return `🎵 *${song.title}*
+
+Lien : ${song.url}
+Durée : ${song.timestamp}`;
+        } else {
+            return "❌ Désolé, aucune chanson trouvée pour cette recherche maitre X.";
+        }
+    } catch (error) {
+        console.error("Erreur lors de la recherche de chanson :", error);
+        return "❌ Une erreur est survenue lors de la recherche de la chanson maitre X.";
+    }
+}
+
+// Simulation des commandes
+(async () => {
+    console.log("=== Simulation du bot ===");
+
+    // Test de la commande !quote
+    console.log("\nCommande : !quote");
+    console.log(getQuote());
+
+    // Test de la commande !song
+    const testQuery = "Kerchack Cam"; // Remplace par une autre chanson pour tester
+    console.log("\nCommande : !song " + testQuery);
+    console.log(await searchSong(testQuery));
+})();
