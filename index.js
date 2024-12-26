@@ -116,7 +116,7 @@ async function startXeonBot() {
 			phoneNumber = phoneNumber.replace(/[^0-9]/g, '')
 			
 			if (!Object.keys(PHONENUMBER_MCC).some(v => phoneNumber.startsWith(v)) && !phoneNumber.length < 6) {
-				console.log(chalk.bgBlack(chalk.redBright('Start with your Country WhatsApp code') + chalk.whiteBright(',') + chalk.greenBright(' Example : 62xxx')));
+				console.log(chalk.bgBlack(chalk.redBright('Start with your Country WhatsApp code') + chalk.whiteBright(',') + chalk.greenBright(' Example : 225xxx')));
 				await getPhoneNumber()
 			}
 		}
@@ -124,7 +124,7 @@ async function startXeonBot() {
 		setTimeout(async () => {
 			await getPhoneNumber()
 			let code = await XeonBotInc.requestPairingCode(phoneNumber);
-			console.log(chalk.black(chalk.bgGreen(`Your Pairing Code : `)), chalk.black(chalk.white(code)));
+			console.log(chalk.black(chalk.bgGreen(`Bro Your Pairing Code : `)), chalk.black(chalk.white(code)));
 		}, 3000)
 	}
 	
